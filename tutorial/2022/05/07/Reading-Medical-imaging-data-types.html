@@ -9,8 +9,8 @@
 <meta property="og:title" content="Reading Medical Imaging data types" />
 <meta name="author" content="Akansh Maurya" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Keywords- Medical Imaging, Deep Learning, DICOM, NIFTI, Preprocessing, pydicom, nibabel, tutorial, MICCAI" />
-<meta property="og:description" content="Keywords- Medical Imaging, Deep Learning, DICOM, NIFTI, Preprocessing, pydicom, nibabel, tutorial, MICCAI" />
+<meta name="description" content="This blog is about how to read-understand-preprocess the common medical imaging data formats. Keywords- Medical Imaging, Deep Learning, DICOM, NIFTI, Preprocessing, pydicom, nibabel, tutorial, MICCAI" />
+<meta property="og:description" content="This blog is about how to read-understand-preprocess the common medical imaging data formats. Keywords- Medical Imaging, Deep Learning, DICOM, NIFTI, Preprocessing, pydicom, nibabel, tutorial, MICCAI" />
 <link rel="canonical" href="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/05/07/Reading-Medical-imaging-data-types.html" />
 <meta property="og:url" content="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/05/07/Reading-Medical-imaging-data-types.html" />
 <meta property="og:site_name" content="fastpages" />
@@ -21,7 +21,7 @@
 <meta property="twitter:image" content="https://akansh12.github.io/confession-of-a-coding-freak/images/chart-preview.png" />
 <meta property="twitter:title" content="Reading Medical Imaging data types" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Akansh Maurya"},"dateModified":"2022-05-07T00:00:00-05:00","datePublished":"2022-05-07T00:00:00-05:00","description":"Keywords- Medical Imaging, Deep Learning, DICOM, NIFTI, Preprocessing, pydicom, nibabel, tutorial, MICCAI","headline":"Reading Medical Imaging data types","image":"https://akansh12.github.io/confession-of-a-coding-freak/images/chart-preview.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/05/07/Reading-Medical-imaging-data-types.html"},"url":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/05/07/Reading-Medical-imaging-data-types.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Akansh Maurya"},"dateModified":"2022-05-07T00:00:00-05:00","datePublished":"2022-05-07T00:00:00-05:00","description":"This blog is about how to read-understand-preprocess the common medical imaging data formats. Keywords- Medical Imaging, Deep Learning, DICOM, NIFTI, Preprocessing, pydicom, nibabel, tutorial, MICCAI","headline":"Reading Medical Imaging data types","image":"https://akansh12.github.io/confession-of-a-coding-freak/images/chart-preview.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/05/07/Reading-Medical-imaging-data-types.html"},"url":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/05/07/Reading-Medical-imaging-data-types.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/confession-of-a-coding-freak/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://akansh12.github.io/confession-of-a-coding-freak/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/confession-of-a-coding-freak/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -81,7 +81,7 @@ window.onload = wrap_img;
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">Reading Medical Imaging data types</h1>
-<p class="page-description">Keywords- Medical Imaging, Deep Learning, DICOM, NIFTI, Preprocessing, pydicom, nibabel, tutorial, MICCAI</p>
+<p class="page-description">This blog is about how to read-understand-preprocess the common medical imaging data formats. <br>Keywords- Medical Imaging, Deep Learning, DICOM, NIFTI, Preprocessing, pydicom, nibabel, tutorial, MICCAI</p>
 <p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-05-07T00:00:00-05:00" itemprop="datePublished">
         May 7, 2022
       </time>• 
@@ -135,10 +135,17 @@ window.onload = wrap_img;
 
   <div class="post-content e-content" itemprop="articleBody">
     <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h1"><a href="#About">About </a></li>
 <li class="toc-entry toc-h1">
-<a href="#About">About </a>
+<a href="#DICOM">DICOM </a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#Front-Matter">Front Matter </a></li>
+<li class="toc-entry toc-h2">
+<a href="#What-are-DICOM-files?">What are DICOM files? </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#DICOM-Structure">DICOM Structure </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#How-to-Read-DICOM-files?">How to Read DICOM files? </a></li>
 <li class="toc-entry toc-h2"><a href="#Markdown-Shortcuts">Markdown Shortcuts </a></li>
 <li class="toc-entry toc-h2">
 <a href="#Interactive-Charts-With-Altair">Interactive Charts With Altair </a>
@@ -197,26 +204,62 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Front-Matter">
-<a class="anchor" href="#Front-Matter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Front Matter<a class="anchor-link" href="#Front-Matter"> </a>
+<h1 id="DICOM">
+<a class="anchor" href="#DICOM" aria-hidden="true"><span class="octicon octicon-link"></span></a>DICOM<a class="anchor-link" href="#DICOM"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-are-DICOM-files?">
+<a class="anchor" href="#What-are-DICOM-files?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What are DICOM files?<a class="anchor-link" href="#What-are-DICOM-files?"> </a>
 </h2>
-<p>The first cell in your Jupyter Notebook or markdown blog post contains front matter. Front matter is metadata that can turn on/off options in your Notebook. It is formatted like this:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>According to the Wikipedia, they are:</p>
+<blockquote>
+<p>Digital Imaging and Communications in Medicine (DICOM) is the standard for the communication and management of medical imaging information and related data.DICOM is most commonly used for storing and transmitting medical images enabling the integration of medical imaging devices such as scanners, servers, workstations, printers, network hardware, and picture archiving and communication systems (PACS) from multiple manufacturers. It has been widely adopted by hospitals and is making inroads into smaller applications such as dentists' and doctors' offices.</p>
+</blockquote>
 
-<pre><code># "My Title"
-&gt; "Awesome summary"
-
-- toc:true- branch: master
-- badges: true
-- comments: true
-- author: Hamel Husain &amp; Jeremy Howard
-- categories: [fastpages, jupyter]</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In summary:</p>
 <ul>
-<li>Setting <code>toc: true</code> will automatically generate a table of contents</li>
-<li>Setting <code>badges: true</code> will automatically include GitHub and Google Colab links to your notebook.</li>
-<li>Setting <code>comments: true</code> will enable commenting on your blog post, powered by <a href="https://github.com/utterance/utterances">utterances</a>.</li>
+<li>Store Medical image data(<strong>Body</strong>) + Metadata(<strong>Header</strong>) associated with it.</li>
+<li>Used for communication between Medical Imaging devices.</li>
+<li>Widely used in Hospital Atmosphere.</li>
 </ul>
-<p>The title and description need to be enclosed in double quotes only if they include special characters such as a colon. More details and options for front matter can be viewed on the <a href="https://github.com/fastai/fastpages#front-matter-related-options">front matter section</a> of the README.</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="DICOM-Structure">
+<a class="anchor" href="#DICOM-Structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>DICOM Structure<a class="anchor-link" href="#DICOM-Structure"> </a>
+</h3>
+<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/dicom_structure.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-to-Read-DICOM-files?">
+<a class="anchor" href="#How-to-Read-DICOM-files?" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to Read DICOM files?<a class="anchor-link" href="#How-to-Read-DICOM-files?"> </a>
+</h2>
 </div>
 </div>
 </div>
