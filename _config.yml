@@ -6,8 +6,8 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: Confession
-description: This blog is mostly dedicated to Machine Learning in Biomedical Engineering.
+title: Home
+description: This blog is mostly dedicated to Application of Machine Learning in Biomedical Engineering.
 github_username: akansh12
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "confession-of-a-coding-freak"
