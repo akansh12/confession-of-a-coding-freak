@@ -90,7 +90,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      37 min read
+      40 min read
     
 </span></p>
 
@@ -155,8 +155,20 @@ window.onload = wrap_img;
 </ul>
 </li>
 <li class="toc-entry toc-h1">
-<a href="#NIFTI">NIFTI </a>
+<a href="#NIfTI">NIfTI </a>
 <ul>
+<li class="toc-entry toc-h2">
+<a href="#What-are-NIfTI-files?">What are NIfTI files? </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#NIfTI-Structure">NIfTI Structure </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2">
+<a href="#How-to-read-NIfTI-file?">How to read NIfTI file? </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Affine-Array-and-Orientation">Affine Array and Orientation </a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h2"><a href="#DICOM-to-NIfTI-Conversion">DICOM to NIfTI Conversion </a></li>
 <li class="toc-entry toc-h2"><a href="#Writing-NIfTI-files">Writing NIfTI files </a></li>
 <li class="toc-entry toc-h2"><a href="#Markdown-Shortcuts">Markdown Shortcuts </a></li>
@@ -279,7 +291,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We will be using Pydicom a python library to read DICOM files.</p>
+<p>We will be using <a href="https://pydicom.github.io/">Pydicom</a> a python library to read DICOM files.</p>
 
 </div>
 </div>
@@ -1768,9 +1780,75 @@ Size of CT Image data: (512, 512)
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="NIFTI">
-<a class="anchor" href="#NIFTI" aria-hidden="true"><span class="octicon octicon-link"></span></a>NIFTI<a class="anchor-link" href="#NIFTI"> </a>
+<h1 id="NIfTI">
+<a class="anchor" href="#NIfTI" aria-hidden="true"><span class="octicon octicon-link"></span></a>NIfTI<a class="anchor-link" href="#NIfTI"> </a>
 </h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/nifti.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-are-NIfTI-files?">
+<a class="anchor" href="#What-are-NIfTI-files?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What are NIfTI files?<a class="anchor-link" href="#What-are-NIfTI-files?"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Another popular and widely used data file extension in medical imaging is NIfTI. It is an acronym for Neuroimaging Informatics Technology Initiative. These are <a href="https://en.wikipedia.org/wiki/Open_file_format">open file formats</a> for the storage of medical image data. They were initially used for neuroimaging, a branch of medical imaging that focuses on the brain, but are now used for other radiological images too.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="NIfTI-Structure">
+<a class="anchor" href="#NIfTI-Structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>NIfTI Structure<a class="anchor-link" href="#NIfTI-Structure"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Similar to DICOM files, NIfTI files have two components those are <strong>Header</strong> and <strong>Body.</strong> The header contains the metadata, but unlike DICOM files, the header of NIfTI has only necessary metadata. The body of NIfTI contains the actual image data(2D, 3D, 4D, etc.)</li>
+<li>NIfTI files are more popular in research settings than in hospital standards.</li>
+<li>File extension is “.nii” or “.nii-gz”. The prior extension refers to a compressed version.</li>
+<li>In general they are easier to handle.</li>
+</ul>
+<p>You can read more about NIfTI files <a href="https://brainder.org/2012/09/23/the-nifti-file-format/">here</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-to-read-NIfTI-file?">
+<a class="anchor" href="#How-to-read-NIfTI-file?" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to read NIfTI file?<a class="anchor-link" href="#How-to-read-NIfTI-file?"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are multiple python libraries that can handle NIfTI files. We will use <a href="https://nipy.org/nibabel/">Nibabel</a> for our purpose. 
+Lets start with some imports, remember you can run all this code as ipynb notebook on google colab or binder by just clicking "run on colab", present on top of this page.</p>
+
 </div>
 </div>
 </div>
@@ -1782,6 +1860,9 @@ Size of CT Image data: (512, 512)
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 </pre></div>
 
     </div>
@@ -1791,6 +1872,14 @@ Size of CT Image data: (512, 512)
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can read the NIfTI file in nibabel using <strong>nib.load(path)</strong> function.</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1798,7 +1887,8 @@ Size of CT Image data: (512, 512)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mri_nifti</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"./blog_1_data/BraTS20_Training_001_flair.nii"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path2nifti</span> <span class="o">=</span> <span class="s2">"./blog_1_data/BraTS20_Training_001_flair.nii"</span>
+<span class="n">mri_nifti</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path2nifti</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1808,6 +1898,14 @@ Size of CT Image data: (512, 512)
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Just like DICOM files NIfTI files also carries metadata but only the necessary one. To access the metadata, we can print the NIfTI file. Click on Show Output to see the output.</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1815,13 +1913,16 @@ Size of CT Image data: (512, 512)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mri_nifti</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mri_nifti</span><span class="p">);</span>
 </pre></div>
 
     </div>
 </div>
 </div>
-
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Output" data-close="Show Output"></summary>
+        <p>
+</p>
 <div class="output_wrapper">
 <div class="output">
 
@@ -1887,9 +1988,18 @@ magic           : b'n+1'
 </div>
 </div>
 
+    </details>
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Each entry is accessible by using header object in the NIfTI.</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1897,7 +2007,9 @@ magic           : b'n+1'
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mri_nifti</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">'qoffset_y'</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mri_nifti</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">'qoffset_y'</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mri_nifti</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">'sizeof_hdr'</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mri_nifti</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">'pixdim'</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -1909,12 +2021,12 @@ magic           : b'n+1'
 
 <div class="output_area">
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array(239., dtype=float32)</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>239.0
+348
+[1. 1. 1. 1. 0. 0. 0. 0.]
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -1923,6 +2035,14 @@ magic           : b'n+1'
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can find the shape of image data using <strong>.shape</strong></p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1954,6 +2074,15 @@ magic           : b'n+1'
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After going through the metadata lets access the actual(image) data from the NIfTI file. This is done using the <strong>get_fdata</strong>. <br>
+Just like in dicom files the image data stored is a Numpy array. We can print the size and type.</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1962,23 +2091,8 @@ magic           : b'n+1'
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">mri_image_data</span> <span class="o">=</span> <span class="n">mri_nifti</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Shape of MRI Array:"</span><span class="p">,</span> <span class="n">mri_image_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Type of MRI Image data:"</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">mri_image_data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shape of MRI Array:"</span><span class="p">,</span> <span class="n">mri_image_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1991,7 +2105,8 @@ magic           : b'n+1'
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Shape of MRI Array: (240, 240, 155)
+<pre>Type of MRI Image data: &lt;class 'numpy.memmap'&gt;
+Shape of MRI Array: (240, 240, 155)
 </pre>
 </div>
 </div>
@@ -2002,19 +2117,17 @@ magic           : b'n+1'
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lets plot the Image data. As the image is an MRI(3D) we have to plot it as GIF.</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="n">animation</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -2037,6 +2150,122 @@ magic           : b'n+1'
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Affine-Array-and-Orientation">
+<a class="anchor" href="#Affine-Array-and-Orientation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Affine Array and Orientation<a class="anchor-link" href="#Affine-Array-and-Orientation"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>All these Medical images(CT scans, MRI, X-RAYs) are represenation of some reference space to digital space. An affine array is an array that tells you the position of the image array data in a reference space. Discussion about the affine matrix is out of the scope of this blog. But I would strongly recommend you to read this <a href="https://nipy.org/nibabel/coordinate_systems.html">article on the coordinate systems and affine</a> for more information. Another great blog will be <a href="https://theaisummer.com/medical-image-coordinates/">Understanding coordinate systems and DICOM for deep learning medical image analysis</a> by Nikolas Adaloglou.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To access the affine array of the medical image in NIfTI, we use <strong>.affine</strong> command.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"The affine Matrix of the MRI Image:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">mri_nifti</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The affine Matrix of the MRI Image:
+ [[ -1.  -0.  -0.   0.]
+ [ -0.  -1.  -0. 239.]
+ [  0.   0.   1.   0.]
+ [  0.   0.   0.   1.]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Through this Affine Array we can access the orinetation of our Medical imaging data in coordicate space. This can be done using <strong>nib.aff2axcodes(Affine Array)</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Orientation of MRI Image:"</span><span class="p">,</span> <span class="n">nib</span><span class="o">.</span><span class="n">aff2axcodes</span><span class="p">(</span><span class="n">mri_nifti</span><span class="o">.</span><span class="n">affine</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Orientation of MRI Image: ('L', 'P', 'S')
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The orientation of Image can be "LPS" or "RAS". The meaning of them are as follows: 
+<img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/LPS_RAS.png" alt="" title="Credit: https://theaisummer.com/medical-image-coordinates/"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Later in pre-processing steps while building Machine/Deep Learning model we ensure that all the data we are geting is of same orientation. Usually the problem of jumble orientation among medical images happen when the data is from multiple sources/scanners.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
