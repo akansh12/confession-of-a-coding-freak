@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About Me
-permalink: /about/
+permalink: https://akansh12.github.io/
 ---
 
 This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
