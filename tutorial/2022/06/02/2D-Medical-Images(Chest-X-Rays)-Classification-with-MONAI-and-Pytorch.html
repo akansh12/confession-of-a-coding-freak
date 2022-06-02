@@ -4,24 +4,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>2D Images(Chest-X-Rays) Classification with MONAI and Pytorch | karma</title>
+<title>2D Medical Images(Chest-X-Rays) Classification with MONAI and Pytorch | karma</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="2D Images(Chest-X-Rays) Classification with MONAI and Pytorch" />
+<meta property="og:title" content="2D Medical Images(Chest-X-Rays) Classification with MONAI and Pytorch" />
 <meta name="author" content="Akansh Maurya" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This blog is about how to classify 2D images, specifically Chest X-Rays into Normal and Pneumonia. By following this tutorial you will understand how to use MONAI and Pytoch for 2D Medical Image classification. We will also discuss various data augmentation techniques. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, pydicom, Pneumonia-Classifciation, tutorial, MICCAI" />
 <meta property="og:description" content="This blog is about how to classify 2D images, specifically Chest X-Rays into Normal and Pneumonia. By following this tutorial you will understand how to use MONAI and Pytoch for 2D Medical Image classification. We will also discuss various data augmentation techniques. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, pydicom, Pneumonia-Classifciation, tutorial, MICCAI" />
-<link rel="canonical" href="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html" />
-<meta property="og:url" content="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html" />
+<link rel="canonical" href="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html" />
+<meta property="og:url" content="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html" />
 <meta property="og:site_name" content="karma" />
 <meta property="og:image" content="https://akansh12.github.io/confession-of-a-coding-freak/images/blog_3.jpg" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-06-02T00:00:00-05:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://akansh12.github.io/confession-of-a-coding-freak/images/blog_3.jpg" />
-<meta property="twitter:title" content="2D Images(Chest-X-Rays) Classification with MONAI and Pytorch" />
+<meta property="twitter:title" content="2D Medical Images(Chest-X-Rays) Classification with MONAI and Pytorch" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Akansh Maurya"},"dateModified":"2022-06-02T00:00:00-05:00","datePublished":"2022-06-02T00:00:00-05:00","description":"This blog is about how to classify 2D images, specifically Chest X-Rays into Normal and Pneumonia. By following this tutorial you will understand how to use MONAI and Pytoch for 2D Medical Image classification. We will also discuss various data augmentation techniques. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, pydicom, Pneumonia-Classifciation, tutorial, MICCAI","headline":"2D Images(Chest-X-Rays) Classification with MONAI and Pytorch","image":"https://akansh12.github.io/confession-of-a-coding-freak/images/blog_3.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html"},"url":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Akansh Maurya"},"dateModified":"2022-06-02T00:00:00-05:00","datePublished":"2022-06-02T00:00:00-05:00","description":"This blog is about how to classify 2D images, specifically Chest X-Rays into Normal and Pneumonia. By following this tutorial you will understand how to use MONAI and Pytoch for 2D Medical Image classification. We will also discuss various data augmentation techniques. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, pydicom, Pneumonia-Classifciation, tutorial, MICCAI","headline":"2D Medical Images(Chest-X-Rays) Classification with MONAI and Pytorch","image":"https://akansh12.github.io/confession-of-a-coding-freak/images/blog_3.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html"},"url":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/confession-of-a-coding-freak/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://akansh12.github.io/confession-of-a-coding-freak/feed.xml" title="karma" /><link rel="shortcut icon" type="image/x-icon" href="/confession-of-a-coding-freak/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -76,7 +76,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">2D Images(Chest-X-Rays) Classification with MONAI and Pytorch</h1><p class="page-description">This blog is about how to classify 2D images, specifically Chest X-Rays into Normal and Pneumonia. By following this tutorial you will understand how to use MONAI and Pytoch for 2D Medical Image classification. We will also discuss various data augmentation techniques.  <br />Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, pydicom, Pneumonia-Classifciation, tutorial, MICCAI</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-02T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">2D Medical Images(Chest-X-Rays) Classification with MONAI and Pytorch</h1><p class="page-description">This blog is about how to classify 2D images, specifically Chest X-Rays into Normal and Pneumonia. By following this tutorial you will understand how to use MONAI and Pytoch for 2D Medical Image classification. We will also discuss various data augmentation techniques.  <br />Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, pydicom, Pneumonia-Classifciation, tutorial, MICCAI</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-02T00:00:00-05:00" itemprop="datePublished">
         Jun 2, 2022
       </time>• 
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -84,7 +84,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      38 min read
+      37 min read
     
 </span></p>
 
@@ -102,24 +102,24 @@ window.onload = wrap_img;
         <div class="pb-5 d-flex flex-justify-center">
           <div class="px-2">
 
-    <a href="https://github.com/akansh12/confession-of-a-coding-freak/tree/master/_notebooks/2022-06-02-2D-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.ipynb" role="button" target="_blank">
+    <a href="https://github.com/akansh12/confession-of-a-coding-freak/tree/master/_notebooks/2022-06-02-2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://mybinder.org/v2/gh/akansh12/confession-of-a-coding-freak/master?filepath=_notebooks%2F2022-06-02-2D-Images%28Chest-X-Rays%29-Classification-with-MONAI-and-Pytorch.ipynb" target="_blank">
+    <a href="https://mybinder.org/v2/gh/akansh12/confession-of-a-coding-freak/master?filepath=_notebooks%2F2022-06-02-2D-Medical-Images%28Chest-X-Rays%29-Classification-with-MONAI-and-Pytorch.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://colab.research.google.com/github/akansh12/confession-of-a-coding-freak/blob/master/_notebooks/2022-06-02-2D-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.ipynb" target="_blank">
+    <a href="https://colab.research.google.com/github/akansh12/confession-of-a-coding-freak/blob/master/_notebooks/2022-06-02-2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
           <div class="px-2">
-  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fakansh12%2Fconfession-of-a-coding-freak%2Fblob%2Fmaster%2F_notebooks%2F2022-06-02-2D-Images%28Chest-X-Rays%29-Classification-with-MONAI-and-Pytorch.ipynb" target="_blank">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fakansh12%2Fconfession-of-a-coding-freak%2Fblob%2Fmaster%2F_notebooks%2F2022-06-02-2D-Medical-Images%28Chest-X-Rays%29-Classification-with-MONAI-and-Pytorch.ipynb" target="_blank">
       <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
   </a>
 </div>
@@ -167,7 +167,7 @@ window.onload = wrap_img;
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
-# file to edit: _notebooks/2022-06-02-2D-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.ipynb
+# file to edit: _notebooks/2022-06-02-2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.ipynb
 -->
 
 <div class="container" id="notebook-container">
@@ -178,8 +178,8 @@ window.onload = wrap_img;
 <h1 id="About">
 <a class="anchor" href="#About" aria-hidden="true"><span class="octicon octicon-link"></span></a>About<a class="anchor-link" href="#About"> </a>
 </h1>
-<p>The seemingly intimidating journey of the Application of AI in Medical Imaging starts with dealing with peculiar file formats. In this blog, we will deal with two data formats that you will deal with more than ninety percent of the time, DICOM and NIFTI.</p>
-<p>Unlike other typical formats of images like JPEG, and PNG the Medical imaging community uses a different format(DICOM and NIFTI) because of certain reasons. Medical Images (X-Rays, MRI, CT scans) are generally generated in Hospitals or Scan Centers. Other than image data the scan center collects some other metadata of the subject, this includes gender, age, name, body part examined, etc(We will discuss in a later section). So to share both of these data, Image data and metadata, with researcher like us there exist a standardized data format. DICOM and Nifti are the most common among them.</p>
+<p><strong>Knowledge is not the power, implementation is power</strong>. ~ <strong>Garrison Wynn.</strong></p>
+<p>This blog is all about giving you the right tools to implement your knowledge and feel powerful. Specifically, in this blog, we will learn how to use the Deep Learning method to classify two-dimensional (2D) Medical images, Chest X-rays into two classes Pneumonia and Normal. We will be using two awesome python libraries Pytorch and MONAI.</p>
 <p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/title_diagram_blog_3.png" alt=""></p>
 <p>Consider this blog more like a tutorial that will help you to get familiar with the tools used to read-open-write medical imaging files. As this blog is written using <a href="https://github.com/fastai/fastpages">fastpages</a>, you can run this whole tutorial and associated code as a Jupyter notebook.</p>
 
@@ -2559,7 +2559,7 @@ magic           : b'n+1'
         theme="github-light"
         crossorigin="anonymous"
         async>
-</script><a class="u-url" href="/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html" hidden></a>
+</script><a class="u-url" href="/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html" hidden></a>
 </article>
 
       </div>
