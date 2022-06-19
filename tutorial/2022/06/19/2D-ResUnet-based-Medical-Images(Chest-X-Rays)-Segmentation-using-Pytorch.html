@@ -4,24 +4,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>How to approach a 2D Medical Images(Chest-X-Rays) classification problem using Pytorch and MONAI | karma</title>
+<title>Segmenting Lungs from Chest X-Rays using ResUnet Architecture | karma</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="How to approach a 2D Medical Images(Chest-X-Rays) classification problem using Pytorch and MONAI" />
+<meta property="og:title" content="Segmenting Lungs from Chest X-Rays using ResUnet Architecture" />
 <meta name="author" content="Akansh Maurya" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="In this blog, I will demonstrate how to approach the classification problems of 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Pydicom, Pneumonia-COVID-Classifciation, tutorial, MICCAI" />
-<meta property="og:description" content="In this blog, I will demonstrate how to approach the classification problems of 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Pydicom, Pneumonia-COVID-Classifciation, tutorial, MICCAI" />
-<link rel="canonical" href="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html" />
-<meta property="og:url" content="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html" />
+<meta name="description" content="In this blog, I will demonstrate how to segment problems of 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI" />
+<meta property="og:description" content="In this blog, I will demonstrate how to segment problems of 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI" />
+<link rel="canonical" href="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" />
+<meta property="og:url" content="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" />
 <meta property="og:site_name" content="karma" />
-<meta property="og:image" content="https://akansh12.github.io/confession-of-a-coding-freak/images/blog_3.jpg" />
+<meta property="og:image" content="https://akansh12.github.io/confession-of-a-coding-freak/images/blog_4.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-06-02T00:00:00-05:00" />
+<meta property="article:published_time" content="2022-06-19T00:00:00-05:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="https://akansh12.github.io/confession-of-a-coding-freak/images/blog_3.jpg" />
-<meta property="twitter:title" content="How to approach a 2D Medical Images(Chest-X-Rays) classification problem using Pytorch and MONAI" />
+<meta property="twitter:image" content="https://akansh12.github.io/confession-of-a-coding-freak/images/blog_4.png" />
+<meta property="twitter:title" content="Segmenting Lungs from Chest X-Rays using ResUnet Architecture" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Akansh Maurya"},"dateModified":"2022-06-02T00:00:00-05:00","datePublished":"2022-06-02T00:00:00-05:00","description":"In this blog, I will demonstrate how to approach the classification problems of 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Pydicom, Pneumonia-COVID-Classifciation, tutorial, MICCAI","headline":"How to approach a 2D Medical Images(Chest-X-Rays) classification problem using Pytorch and MONAI","image":"https://akansh12.github.io/confession-of-a-coding-freak/images/blog_3.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html"},"url":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Akansh Maurya"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"In this blog, I will demonstrate how to segment problems of 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI","headline":"Segmenting Lungs from Chest X-Rays using ResUnet Architecture","image":"https://akansh12.github.io/confession-of-a-coding-freak/images/blog_4.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html"},"url":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/confession-of-a-coding-freak/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://akansh12.github.io/confession-of-a-coding-freak/feed.xml" title="karma" /><link rel="shortcut icon" type="image/x-icon" href="/confession-of-a-coding-freak/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -76,15 +76,15 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">How to approach a 2D Medical Images(Chest-X-Rays) classification problem using Pytorch and MONAI</h1><p class="page-description">In this blog, I will demonstrate how to approach the classification problems of 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification.    <br />Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Pydicom, Pneumonia-COVID-Classifciation, tutorial, MICCAI</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-02T00:00:00-05:00" itemprop="datePublished">
-        Jun 2, 2022
+    <h1 class="post-title p-name" itemprop="name headline">Segmenting Lungs from Chest X-Rays using ResUnet Architecture</h1><p class="page-description">In this blog, I will demonstrate how to segment problems of 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification.    <br />Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-19T00:00:00-05:00" itemprop="datePublished">
+        Jun 19, 2022
       </time>• 
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
             <span class="p-author h-card" itemprop="name">Akansh Maurya</span></span>
        • <span class="read-time" title="Estimated read time">
     
     
-      39 min read
+      41 min read
     
 </span></p>
 
@@ -102,24 +102,24 @@ window.onload = wrap_img;
         <div class="pb-5 d-flex flex-justify-center">
           <div class="px-2">
 
-    <a href="https://github.com/akansh12/confession-of-a-coding-freak/tree/master/_notebooks/2022-06-02-2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.ipynb" role="button" target="_blank">
+    <a href="https://github.com/akansh12/confession-of-a-coding-freak/tree/master/_notebooks/2022-06-19-2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://mybinder.org/v2/gh/akansh12/confession-of-a-coding-freak/master?filepath=_notebooks%2F2022-06-02-2D-Medical-Images%28Chest-X-Rays%29-Classification-with-MONAI-and-Pytorch.ipynb" target="_blank">
+    <a href="https://mybinder.org/v2/gh/akansh12/confession-of-a-coding-freak/master?filepath=_notebooks%2F2022-06-19-2D-ResUnet-based-Medical-Images%28Chest-X-Rays%29-Segmentation-using-Pytorch.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://colab.research.google.com/github/akansh12/confession-of-a-coding-freak/blob/master/_notebooks/2022-06-02-2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.ipynb" target="_blank">
+    <a href="https://colab.research.google.com/github/akansh12/confession-of-a-coding-freak/blob/master/_notebooks/2022-06-19-2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
           <div class="px-2">
-  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fakansh12%2Fconfession-of-a-coding-freak%2Fblob%2Fmaster%2F_notebooks%2F2022-06-02-2D-Medical-Images%28Chest-X-Rays%29-Classification-with-MONAI-and-Pytorch.ipynb" target="_blank">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fakansh12%2Fconfession-of-a-coding-freak%2Fblob%2Fmaster%2F_notebooks%2F2022-06-19-2D-ResUnet-based-Medical-Images%28Chest-X-Rays%29-Segmentation-using-Pytorch.ipynb" target="_blank">
       <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
   </a>
 </div>
@@ -132,7 +132,8 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#About">About </a></li>
 <li class="toc-entry toc-h1"><a href="#Dataset:-Chest-XR-COVID-19-detection-Challenge">Dataset: Chest XR COVID-19 detection Challenge </a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#What-are-DICOM-files?">What are DICOM files? </a>
+<li class="toc-entry toc-h2"><a href="#What-is-the-challenge?">What is the challenge? </a></li>
+<li class="toc-entry toc-h2"><a href="#Getting-the-Dataset">Getting the Dataset </a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#DICOM-Structure">DICOM Structure </a></li>
 </ul>
@@ -167,7 +168,7 @@ window.onload = wrap_img;
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
-# file to edit: _notebooks/2022-06-02-2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.ipynb
+# file to edit: _notebooks/2022-06-19-2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.ipynb
 -->
 
 <div class="container" id="notebook-container">
@@ -223,7 +224,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Interpretation of chest X-rays requires an expert physician and with the advent of the COVID-19 pandemic, a practitioner can misclassify the X-Rays easily. Computer-aided methods that are fast and reliable can prove to be effective and help doctors for better understanding and classification.</p>
+<p>Interpretation of chest X-rays requires an expert physician and with the advent of the COVID-19 pandemic, a practitioner can misclassify the X-Rays easily. Computer-aided methods that are fast and reliable can prove to be effective and help doctors for better understanding and classification. Let us use or knowledge of AI to help radiologist.</p>
 
 </div>
 </div>
@@ -231,12 +232,105 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-are-DICOM-files?">
-<a class="anchor" href="#What-are-DICOM-files?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What are DICOM files?<a class="anchor-link" href="#What-are-DICOM-files?"> </a>
+<h2 id="What-is-the-challenge?">
+<a class="anchor" href="#What-is-the-challenge?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is the challenge?<a class="anchor-link" href="#What-is-the-challenge?"> </a>
 </h2>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://cxr-covid19.grand-challenge.org/CXR-COVID19/">Chest XR COVID-19 detection Challenge</a> was hosted on grand-challenge.org in year 2021 and the challenge aims to develop a multiclass classification algorithm capable of detecting COVID-19 in Chest X-ray images. The dataset contains 3 image classes: COVID-19, Pneumonia and Normal (healthy). 
+<img src="/confession-of-a-coding-freak/images/copied_from_nb/./my_icons/COVID-Challenge.jpg" alt="" title="Credit:https://cxr-covid19.grand-challenge.org"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Getting-the-Dataset">
+<a class="anchor" href="#Getting-the-Dataset" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting the Dataset<a class="anchor-link" href="#Getting-the-Dataset"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The dataset is available on google drive. It has a size of 3.4GB. All the CXR are either .jpeg, .jpg, .png files. We can download and extract the dataset using the following code.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>gdown --id 12kvHaeYQVGtdcsaxtsGu8ft-OuY-BKya
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s2">"./CXR_Covid-19_Challenge.zip"</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s2">"./"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting pydicom
+  Downloading pydicom-2.3.0-py3-none-any.whl (2.0 MB)
+     |████████████████████████████████| 2.0 MB 6.4 MB/s eta 0:00:01
+Installing collected packages: pydicom
+Successfully installed pydicom-2.3.0
+Collecting gdown
+  Downloading gdown-4.4.0.tar.gz (14 kB)
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+    Preparing wheel metadata ... done
+Requirement already satisfied: tqdm in /media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages (from gdown) (4.63.0)
+Requirement already satisfied: requests[socks] in /media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages (from gdown) (2.27.1)
+Requirement already satisfied: beautifulsoup4 in /media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages (from gdown) (4.11.1)
+Requirement already satisfied: six in /media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages (from gdown) (1.16.0)
+Collecting filelock
+  Downloading filelock-3.7.1-py3-none-any.whl (10 kB)
+Requirement already satisfied: soupsieve&gt;1.2 in /media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages (from beautifulsoup4-&gt;gdown) (2.3.1)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages (from requests[socks]-&gt;gdown) (2021.10.8)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages (from requests[socks]-&gt;gdown) (2.0.4)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages (from requests[socks]-&gt;gdown) (1.26.8)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages (from requests[socks]-&gt;gdown) (3.3)
+Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages (from requests[socks]-&gt;gdown) (1.7.1)
+Building wheels for collected packages: gdown
+  Building wheel for gdown (PEP 517) ... done
+  Created wheel for gdown: filename=gdown-4.4.0-py3-none-any.whl size=14759 sha256=5e2984665becc50f013dfc444e54a9d0fcd6734b314ef8e73b91855285f77039
+  Stored in directory: /home/akansh/.cache/pip/wheels/7d/37/b6/b2a79c75e898c0b8e46ff255102602d7159a10d9af0d80641a
+Successfully built gdown
+Installing collected packages: filelock, gdown
+Successfully installed filelock-3.7.1 gdown-4.4.0
+/media/akansh/0C6D08990C6D0899/akansh-env/lib/python3.9/site-packages/gdown/cli.py:127: FutureWarning: Option `--id` was deprecated in version 4.3.1 and will be removed in 5.0. You don't need to pass it anymore to use a file ID.
+  warnings.warn(
+Downloading...
+From: https://drive.google.com/uc?id=12kvHaeYQVGtdcsaxtsGu8ft-OuY-BKya
+To: /media/akansh/0C6D08990C6D0899/Data/2d_classification/CXR_Covid-19_Challenge.zip
+ 17%|██████▋                                | 616M/3.61G [09:53&lt;47:41, 1.05MB/s]</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2591,7 +2685,7 @@ magic           : b'n+1'
         theme="github-light"
         crossorigin="anonymous"
         async>
-</script><a class="u-url" href="/confession-of-a-coding-freak/tutorial/2022/06/02/2D-Medical-Images(Chest-X-Rays)-Classification-with-MONAI-and-Pytorch.html" hidden></a>
+</script><a class="u-url" href="/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" hidden></a>
 </article>
 
       </div>
