@@ -14,3 +14,9 @@ _notebooks/.ipynb_checkpoints
 __pycache__
 _notebooks/blog_1_data/
 _notebooks/blog_1_data.zip
+_notebooks/data/
+_notebooks/covid.csv
+_notebooks/covid.csv
+.gitignore
+_notebooks/normal.csv
+_notebooks/pneumonia.csv
