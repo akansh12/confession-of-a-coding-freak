@@ -1,1 +1,1 @@
-Sitemap: https://akansh12.github.io/confession-of-a-coding-freak/sitemap.xml
+Sitemap: https://akansh12.github.io/karma/sitemap.xml
