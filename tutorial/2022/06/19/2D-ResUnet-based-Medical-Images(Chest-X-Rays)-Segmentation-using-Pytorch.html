@@ -11,19 +11,19 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI" />
 <meta property="og:description" content="In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI" />
-<link rel="canonical" href="https://akansh12.github.io/karma/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" />
-<meta property="og:url" content="https://akansh12.github.io/karma/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" />
+<link rel="canonical" href="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" />
+<meta property="og:url" content="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" />
 <meta property="og:site_name" content="karma" />
-<meta property="og:image" content="https://akansh12.github.io/karma/images/blog_4.png" />
+<meta property="og:image" content="https://akansh12.github.io/confession-of-a-coding-freak/images/blog_4.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-06-19T00:00:00-05:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="https://akansh12.github.io/karma/images/blog_4.png" />
+<meta property="twitter:image" content="https://akansh12.github.io/confession-of-a-coding-freak/images/blog_4.png" />
 <meta property="twitter:title" content="Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch+MONAI)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Akansh Maurya"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI","headline":"Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch+MONAI)","image":"https://akansh12.github.io/karma/images/blog_4.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://akansh12.github.io/karma/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html"},"url":"https://akansh12.github.io/karma/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Akansh Maurya"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI","headline":"Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch+MONAI)","image":"https://akansh12.github.io/confession-of-a-coding-freak/images/blog_4.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html"},"url":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/karma/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://akansh12.github.io/karma/feed.xml" title="karma" /><link rel="shortcut icon" type="image/x-icon" href="/karma/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="/confession-of-a-coding-freak/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://akansh12.github.io/confession-of-a-coding-freak/feed.xml" title="karma" /><link rel="shortcut icon" type="image/x-icon" href="/confession-of-a-coding-freak/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
@@ -74,7 +74,7 @@ window.onload = wrap_img;
 </head>
 <body><header class="site-header">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/karma/">karma</a><nav class="site-nav">
+  <div class="wrapper"><a class="site-title" rel="author" href="/confession-of-a-coding-freak/">karma</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
           <span class="menu-icon">
@@ -84,7 +84,7 @@ window.onload = wrap_img;
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/karma/about-me/">About Me</a><a class="page-link" href="/karma/search/">Search</a><a class="page-link" href="/karma/categories/">Tags</a></div>
+        <div class="trigger"><a class="page-link" href="/confession-of-a-coding-freak/about-me/">About Me</a><a class="page-link" href="/confession-of-a-coding-freak/search/">Search</a><a class="page-link" href="/confession-of-a-coding-freak/categories/">Tags</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -107,7 +107,7 @@ window.onload = wrap_img;
     
       <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
       
-        <a class="category-tags-link" href="/karma/categories/#tutorial">tutorial</a>
+        <a class="category-tags-link" href="/confession-of-a-coding-freak/categories/#tutorial">tutorial</a>
         
       
       </p>
@@ -119,24 +119,24 @@ window.onload = wrap_img;
           <div class="px-2">
 
     <a href="https://github.com/akansh12/confession-of-a-coding-freak/tree/master/_notebooks/2022-06-19-2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.ipynb" role="button" target="_blank">
-<img class="notebook-badge-image" src="/karma/assets/badges/github.svg" alt="View On GitHub">
+<img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
           <div class="px-2">
     <a href="https://mybinder.org/v2/gh/akansh12/confession-of-a-coding-freak/master?filepath=_notebooks%2F2022-06-19-2D-ResUnet-based-Medical-Images%28Chest-X-Rays%29-Segmentation-using-Pytorch.ipynb" target="_blank">
-        <img class="notebook-badge-image" src="/karma/assets/badges/binder.svg" alt="Open In Binder"/>
+        <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
           <div class="px-2">
     <a href="https://colab.research.google.com/github/akansh12/confession-of-a-coding-freak/blob/master/_notebooks/2022-06-19-2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.ipynb" target="_blank">
-        <img class="notebook-badge-image" src="/karma/assets/badges/colab.svg" alt="Open In Colab"/>
+        <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
           <div class="px-2">
   <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fakansh12%2Fconfession-of-a-coding-freak%2Fblob%2Fmaster%2F_notebooks%2F2022-06-19-2D-ResUnet-based-Medical-Images%28Chest-X-Rays%29-Segmentation-using-Pytorch.ipynb" target="_blank">
-      <img class="notebook-badge-image" src="/karma/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+      <img class="notebook-badge-image" src="/confession-of-a-coding-freak/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
   </a>
 </div>
 
@@ -213,7 +213,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="/karma/images/copied_from_nb/my_icons/title_diagram_blog_3.png" alt=""></p>
+<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/title_diagram_blog_3.png" alt=""></p>
 <p>Consider this blog more like a tutorial that will help you to get familiar with the tools used to read-open-write medical imaging files. As this blog is written using <a href="https://github.com/fastai/fastpages">fastpages</a>, you can run this whole tutorial and associated code as a Jupyter notebook.</p>
 
 </div>
@@ -258,7 +258,7 @@ window.onload = wrap_img;
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="https://cxr-covid19.grand-challenge.org/CXR-COVID19/">Chest XR COVID-19 detection Challenge</a> was hosted on grand-challenge.org in year 2021 and the challenge aims to develop a multiclass classification algorithm capable of detecting COVID-19 in Chest X-ray images. The dataset contains 3 image classes: COVID-19, Pneumonia and Normal (healthy). 
-<img src="/karma/images/copied_from_nb/./my_icons/COVID-Challenge.jpg" alt="" title="Credit:https://cxr-covid19.grand-challenge.org"></p>
+<img src="/confession-of-a-coding-freak/images/copied_from_nb/./my_icons/COVID-Challenge.jpg" alt="" title="Credit:https://cxr-covid19.grand-challenge.org"></p>
 
 </div>
 </div>
@@ -377,7 +377,7 @@ To: /media/akansh/0C6D08990C6D0899/Data/2d_classification/CXR_Covid-19_Challenge
 <h3 id="DICOM-Structure">
 <a class="anchor" href="#DICOM-Structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>DICOM Structure<a class="anchor-link" href="#DICOM-Structure"> </a>
 </h3>
-<p><img src="/karma/images/copied_from_nb/my_icons/dicom_structure.png" alt=""></p>
+<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/dicom_structure.png" alt=""></p>
 
 </div>
 </div>
@@ -719,7 +719,7 @@ Reading a single file .dcm file using <strong>pydicom.read_file(path)</strong> f
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I know that is a hell lot of metadata. Each entry is accessible by its unique Data Tag. Data tags use hexadecimal encoded identifiers. As an example:</p>
-<p><img src="/karma/images/copied_from_nb/my_icons/Dicom_header.png" alt=""></p>
+<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/Dicom_header.png" alt=""></p>
 <p>We can call out different using the following code:</p>
 <p>Note: The 0x in front of the identifier tells the python code to treat the data tag values as hexadecimal.</p>
 
@@ -1892,7 +1892,7 @@ Size of CT Image data: (512, 512)
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="/karma/images/copied_from_nb/my_icons/nifti.png" alt=""></p>
+<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/nifti.png" alt=""></p>
 
 </div>
 </div>
@@ -2360,7 +2360,7 @@ Shape of MRI Array: (240, 240, 155)
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The orientation of Image can be "LPS" or "RAS". The meaning of them are as follows: 
-<img src="/karma/images/copied_from_nb/my_icons/LPS_RAS.png" alt="" title="Credit: https://theaisummer.com/medical-image-coordinates/"></p>
+<img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/LPS_RAS.png" alt="" title="Credit: https://theaisummer.com/medical-image-coordinates/"></p>
 
 </div>
 </div>
@@ -2701,21 +2701,21 @@ magic           : b'n+1'
         theme="github-light"
         crossorigin="anonymous"
         async>
-</script><a class="u-url" href="/karma/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" hidden></a>
+</script><a class="u-url" href="/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" hidden></a>
 </article>
 
       </div>
     </main><footer class="site-footer h-card">
-  <data class="u-url" href="/karma/"></data>
+  <data class="u-url" href="/confession-of-a-coding-freak/"></data>
 
   <div class="wrapper">
 
     <div class="footer-col-wrapper">
       <div class="footer-col">
         <p class="feed-subscribe">
-          <a href="/karma/feed.xml">
+          <a href="/confession-of-a-coding-freak/feed.xml">
             <svg class="svg-icon orange">
-              <use xlink:href="/karma/assets/minima-social-icons.svg#rss"></use>
+              <use xlink:href="/confession-of-a-coding-freak/assets/minima-social-icons.svg#rss"></use>
             </svg><span>Subscribe</span>
           </a>
         </p>
@@ -2725,7 +2725,7 @@ magic           : b'n+1'
       </div>
     </div>
 
-    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/akansh12" target="_blank" title="akansh12"><svg class="svg-icon grey"><use xlink:href="/karma/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/akansh_maurya" target="_blank" title="akansh_maurya"><svg class="svg-icon grey"><use xlink:href="/karma/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/akansh12" target="_blank" title="akansh12"><svg class="svg-icon grey"><use xlink:href="/confession-of-a-coding-freak/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/akansh_maurya" target="_blank" title="akansh_maurya"><svg class="svg-icon grey"><use xlink:href="/confession-of-a-coding-freak/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
 </div>
 
   </div>
