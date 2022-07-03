@@ -196,7 +196,7 @@ window.onload = wrap_img;
 </h1>
 <p>The seemingly intimidating journey of the Application of AI in Medical Imaging starts with dealing with peculiar file formats. In this blog, we will deal with two data formats that you will deal with more than ninety percent of the time, DICOM and NIFTI.</p>
 <p>Unlike other typical formats of images like JPEG, and PNG the Medical imaging community uses a different format(DICOM and NIFTI) because of certain reasons. Medical Images (X-Rays, MRI, CT scans) are generally generated in Hospitals or Scan Centers. Other than image data the scan center collects some other metadata of the subject, this includes gender, age, name, body part examined, etc(We will discuss in a later section). So to share both of these data, Image data and metadata, with researcher like us there exist a standardized data format. DICOM and Nifti are the most common among them.</p>
-<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/blog_1_image_1.png" alt=""></p>
+<p><img src="/karma/images/copied_from_nb/my_icons/blog_1_image_1.png" alt=""></p>
 <p>Consider this blog more like a tutorial that will help you to get familiar with the tools used to read-open-write medical imaging files. As this blog is written using <a href="https://github.com/fastai/fastpages">fastpages</a>, you can run this whole tutorial and associated code as a Jupyter notebook.</p>
 
 </div>
@@ -250,7 +250,7 @@ window.onload = wrap_img;
 <h3 id="DICOM-Structure">
 <a class="anchor" href="#DICOM-Structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>DICOM Structure<a class="anchor-link" href="#DICOM-Structure"> </a>
 </h3>
-<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/dicom_structure.png" alt=""></p>
+<p><img src="/karma/images/copied_from_nb/my_icons/dicom_structure.png" alt=""></p>
 
 </div>
 </div>
@@ -592,7 +592,7 @@ Reading a single file .dcm file using <strong>pydicom.read_file(path)</strong> f
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I know that is a hell lot of metadata. Each entry is accessible by its unique Data Tag. Data tags use hexadecimal encoded identifiers. As an example:</p>
-<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/Dicom_header.png" alt=""></p>
+<p><img src="/karma/images/copied_from_nb/my_icons/Dicom_header.png" alt=""></p>
 <p>We can call out different using the following code:</p>
 <p>Note: The 0x in front of the identifier tells the python code to treat the data tag values as hexadecimal.</p>
 
@@ -1765,7 +1765,7 @@ Size of CT Image data: (512, 512)
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/nifti.png" alt=""></p>
+<p><img src="/karma/images/copied_from_nb/my_icons/nifti.png" alt=""></p>
 
 </div>
 </div>
@@ -2233,7 +2233,7 @@ Shape of MRI Array: (240, 240, 155)
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The orientation of Image can be "LPS" or "RAS". The meaning of them are as follows: 
-<img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/LPS_RAS.png" alt="" title="Credit: https://theaisummer.com/medical-image-coordinates/"></p>
+<img src="/karma/images/copied_from_nb/my_icons/LPS_RAS.png" alt="" title="Credit: https://theaisummer.com/medical-image-coordinates/"></p>
 
 </div>
 </div>
