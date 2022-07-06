@@ -4,13 +4,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch+MONAI) | karma</title>
+<title>Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch) | karma</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch+MONAI)" />
+<meta property="og:title" content="Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch)" />
 <meta name="author" content="Akansh Maurya" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI" />
-<meta property="og:description" content="In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI" />
+<meta name="description" content="In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in 2D Medical images segmentation. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI" />
+<meta property="og:description" content="In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in 2D Medical images segmentation. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI" />
 <link rel="canonical" href="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" />
 <meta property="og:url" content="https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html" />
 <meta property="og:site_name" content="karma" />
@@ -19,9 +19,9 @@
 <meta property="article:published_time" content="2022-06-19T00:00:00-05:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://akansh12.github.io/confession-of-a-coding-freak/images/blog_4.png" />
-<meta property="twitter:title" content="Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch+MONAI)" />
+<meta property="twitter:title" content="Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Akansh Maurya"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI","headline":"Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch+MONAI)","image":"https://akansh12.github.io/confession-of-a-coding-freak/images/blog_4.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html"},"url":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Akansh Maurya"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in 2D Medical images segmentation. Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI","headline":"Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch)","image":"https://akansh12.github.io/confession-of-a-coding-freak/images/blog_4.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html"},"url":"https://akansh12.github.io/confession-of-a-coding-freak/tutorial/2022/06/19/2D-ResUnet-based-Medical-Images(Chest-X-Rays)-Segmentation-using-Pytorch.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/confession-of-a-coding-freak/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://akansh12.github.io/confession-of-a-coding-freak/feed.xml" title="karma" /><link rel="shortcut icon" type="image/x-icon" href="/confession-of-a-coding-freak/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -92,7 +92,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch+MONAI)</h1><p class="page-description">In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in Chest X rays classification.    <br />Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-19T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Segmenting Lungs from Chest X-Rays using ResUnet Architecture (Pytorch)</h1><p class="page-description">In this blog, I will demonstrate how to deal with segmentation problems in 2D Medical images (Chest X-rays). You will get familiar with various preprocessing+post processing, data augmentation techniques, tips, and dead-ends in 2D Medical images segmentation.    <br />Keywords- Medical Imaging, Deep Learning, Pytorch, MONAI, Chest X-Ray, Segmentation, UNet, ResUnet, Lung segmentaion, tutorial, MICCAI</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-19T00:00:00-05:00" itemprop="datePublished">
         Jun 19, 2022
       </time>• 
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -145,8 +145,13 @@ window.onload = wrap_img;
 
   <div class="post-content e-content" itemprop="articleBody">
     <ul id="toc" class="section-nav">
-<li class="toc-entry toc-h1"><a href="#About">About </a></li>
-<li class="toc-entry toc-h1"><a href="#Dataset:-Chest-XR-COVID-19-detection-Challenge">Dataset: Chest XR COVID-19 detection Challenge </a>
+<li class="toc-entry toc-h1"><a href="#About">About </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#What-is-Segmentation?">What is Segmentation? </a></li>
+<li class="toc-entry toc-h2"><a href="#Why-Segmentation?">Why Segmentation? </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Dataset:-Montgomery-County-CXR-Set">Dataset: Montgomery-County-CXR-Set </a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#What-is-the-challenge?">What is the challenge? </a></li>
 <li class="toc-entry toc-h2"><a href="#Getting-the-Dataset">Getting the Dataset </a>
@@ -197,7 +202,15 @@ window.onload = wrap_img;
 </h1>
 <p><strong>Knowledge is not the power, implementation is power</strong>. ~ <strong>Garrison Wynn.</strong></p>
 <p>You have completed a course in Machine Learning and Deep learning, and you are excited to apply your newly earned AI wisdom to the field of Healthcare and Medical images, but the only obstacle is that you don't know which tools you should use? How should you approach the problem and write the code? And the bigger question <strong>How should I move from theory to practice?</strong></p>
-<p>If these are your worries, then you are at the right place. This blog is all about giving you the right tools to implement your knowledge and feel <strong>powerful</strong>. Specifically, in this blog, we will learn how to use the Deep Learning method to segment two-dimensional (2D) Medical images, Chest X-rays into three classes COVID-19, Pneumonia, and Normal. We will be using two awesome python libraries Pytorch and MONAI. We will be learning Pre/Post-processing techniques, Data Augmentation methods. We will also review the concepts of the weighted cross-entropy loss function, learning rate scheduler, AUC-ROC metric, DenseNet, efficientNet, and so on.</p>
+<p>If these are your worries, then you are at the right place. This blog is all about giving you the right tools to implement your knowledge and feel <strong>powerful</strong>. In this blog, we will learn how to perform segmentation in 2D images. We will be working with Chest X-rays to segment lungs but this blog is applicable for other datasets too. We will be using awesome python libraries Pytorch. We will be learning Pre/Post-processing techniques, Data Augmentation methods. We will also review the concepts of the weighted cross-entropy loss function, learning rate scheduler, AUC-ROC metric, DenseNet, efficientNet, and so on.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As this blog is written using <a href="https://github.com/fastai/fastpages">fastpages</a>, you can run this whole tutorial and associated code as a Jupyter notebook.</p>
 
 </div>
 </div>
@@ -206,6 +219,7 @@ window.onload = wrap_img;
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Isn't that exciting?</strong></p>
+<p>Lets get Started!</p>
 
 </div>
 </div>
@@ -213,8 +227,22 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/title_diagram_blog_3.png" alt=""></p>
-<p>Consider this blog more like a tutorial that will help you to get familiar with the tools used to read-open-write medical imaging files. As this blog is written using <a href="https://github.com/fastai/fastpages">fastpages</a>, you can run this whole tutorial and associated code as a Jupyter notebook.</p>
+<h2 id="What-is-Segmentation?">
+<a class="anchor" href="#What-is-Segmentation?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is Segmentation?<a class="anchor-link" href="#What-is-Segmentation?"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Many of you must be already familiar with what segmentation is? In case you are new, a one-line definition of segmentation could be that it is <strong>pixel-wise classification</strong>. In segmentation, we try to classify each and every pixel of the image into one or the other class.</p>
+<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/./my_icons/computer-vision-problems-1.png" alt="" title="Credit: https://blog.roboflow.com"></p>
+<p>In our case we have to classify all the pixels into two classes:</p>
+<ul>
+<li>0: Background</li>
+<li>1: Lungs</li>
+</ul>
 
 </div>
 </div>
@@ -222,8 +250,32 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Dataset:-Chest-XR-COVID-19-detection-Challenge">
-<a class="anchor" href="#Dataset:-Chest-XR-COVID-19-detection-Challenge" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dataset: Chest XR COVID-19 detection Challenge<a class="anchor-link" href="#Dataset:-Chest-XR-COVID-19-detection-Challenge"> </a>
+<h2 id="Why-Segmentation?">
+<a class="anchor" href="#Why-Segmentation?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why Segmentation?<a class="anchor-link" href="#Why-Segmentation?"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Medical Image segmentation has become an essential task in medical image analysis. In the paper “<strong>Why rankings of biomedical image analysis competitions should be interpreted with care”,</strong> a study on 150 biomedical image analysis challenges was performed. It showed that segmentation is the most popular problem.</p>
+<p><img src="/confession-of-a-coding-freak/images/copied_from_nb/my_icons/why_segmentation.png" alt="" title="Credit:https://www.nature.com/articles/s41467-018-07619-7"></p>
+<p>The possible reason is that the other problems are less challenging, or the segmentation has a more widespread use case than others. Some applications of segmentation are as follows:</p>
+<ul>
+<li>Automatic measurement of organs.</li>
+<li>Cell counting</li>
+<li>Simulations based on the extracted boundary information</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Dataset:-Montgomery-County-CXR-Set">
+<a class="anchor" href="#Dataset:-Montgomery-County-CXR-Set" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dataset: Montgomery-County-CXR-Set<a class="anchor-link" href="#Dataset:-Montgomery-County-CXR-Set"> </a>
 </h1>
 </div>
 </div>
@@ -2667,6 +2719,9 @@ magic           : b'n+1'
 <a class="anchor" href="#About-Me:" aria-hidden="true"><span class="octicon octicon-link"></span></a>About Me:<a class="anchor-link" href="#About-Me:"> </a>
 </h1>
 <p>I am Akansh maurya, working as a post-bacc at Robert Bosch Center of Data Science and AI, Indian Institute of Technology(IIT), Madras.</p>
+<blockquote>
+<p>My page:<a href="https://akansh12.github.io/">https://akansh12.github.io/</a></p>
+</blockquote>
 
 </div>
 </div>
@@ -2684,7 +2739,17 @@ magic           : b'n+1'
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Consider joining our Slack channel for discussion, tutorials, talks and, new research in Deep learning and Medical Imaging.</p>
+<p>Consider joining our telegram channel for discussion, tutorials, talks and, new research in Deep learning and Medical Imaging.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote>
+<script async="" src="https://telegram.org/js/telegram-widget.js?19" data-telegram-post="karma_DL_in_medical_imaging/3" data-width="100%"></script>
+</blockquote>
 
 </div>
 </div>
