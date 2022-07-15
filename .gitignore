@@ -22,3 +22,4 @@ _notebooks/normal.csv
 _notebooks/pneumonia.csv
 _notebooks/val_labels.csv
 _notebooks/train_labels.csv
+_notebooks/data.lhncbc.nlm.nih.gov
